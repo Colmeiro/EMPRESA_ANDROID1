@@ -1,0 +1,60 @@
+package gal.colme.android_repaso1;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Comercial extends Empleado{
+    //atributos
+    private ArrayList idiomas;
+    
+    
+    //constructores
+    public Comercial(){
+    }
+    
+    public Comercial(String nombre, String apellido1, String apellido2, int edad, Sexo sexo, String titulacion, LocalDate fechaInicio, ArrayList<String> idiomas){
+        super(nombre, apellido1, apellido2, edad, sexo, titulacion, fechaInicio);
+        this.idiomas = idiomas;
+    }
+    
+    
+    //métodos
+    public ArrayList idiomasComercial(){
+        Scanner teclado = new Scanner(System.in);
+        ArrayList<String> idiomasArray = new ArrayList();
+        String idioma;
+        System.out.println("Escriba uno a uno los idiomas que maneje para engañar a la gente:");
+        System.out.println("Cuando desee salir pulse 0");
+        do{
+            System.out.println("Digite otro idioma o pulse 0(CERO):");
+            System.out.println("-----------------------------------");
+            idioma = teclado.next();//TODO ver que hace sin el line
+            if(!idioma.equals("0")) idiomasArray.add(idioma);
+        }while(!idioma.equals("0"));
+    return idiomasArray;
+    }
+    
+    
+    @Override
+    public void toStringArray(){
+        System.out.println("Idiomas hablados: ");
+        for (int i=0; i<idiomas.size();i++){
+            System.out.println((i+1)+"-. "+idiomas.get(i));
+        }
+        System.out.println("");
+    }
+    
+//    @Override
+//    public String toString(){
+//        return super.toString();
+//    }
+    
+    
+    //getters y setters
+    public ArrayList getIdiomas() {
+        return idiomas;
+    }
+    public void setIdiomas(ArrayList idiomas) {
+        this.idiomas = idiomas;
+    }   
+}
