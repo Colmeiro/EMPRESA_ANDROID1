@@ -1,0 +1,58 @@
+package gal.colme.android_repaso1;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class MainClass {
+    
+    public static void main(String[] args) {
+                
+        ArrayList<Empleado> listaEmpleados = new ArrayList();
+        Scanner teclado = new Scanner(System.in);
+        int opcion = Menu.mostrarMenu();
+        
+        listaEmpleados = Empleado.rellenarEmpleados();//relleno para pruebas
+        
+        while(opcion!=0){
+            switch(opcion)  {
+             
+                case 1:  //listar emplead@s
+                    System.out.println("LISTA ORIGINAL");
+                    Empleado.listarEmpleados(listaEmpleados);
+                    System.out.println("-º-º-º-º-º-º-º-º-º-º-º-º");
+                    System.out.println("**************");
+                    System.out.println("-º-º-º-º-º-º-º-º-º-º-º-º\n");
+                    System.out.println("LISTA ORDENADA");
+                    Empleado.listarEmpleados(Empleado.ordenarAlfabeticamente(listaEmpleados));
+                    break;    
+                
+                case 2: //inscribir empleados                    
+                    
+                    switch(Menu.ComprobarDepartamento()){
+                        
+                        case 1://es un programador
+                            Programador auxProg = new Programador();
+                            auxProg.datosEmpleado();
+                            auxProg.setLenguajes(auxProg.lenguajesProgramador());
+                            listaEmpleados.add(auxProg);
+                            break;
+                            
+                        case 2://es un comercial de mierda
+                            Comercial auxComer = new Comercial();
+                            auxComer.datosEmpleado();
+                            auxComer.setIdiomas(auxComer.idiomasComercial());
+                            listaEmpleados.add(auxComer);
+                            break;              
+                        
+                        default:
+                            System.out.println("No existe esa categoría.");
+                            break;
+                    }
+                    break;
+                
+                default:    //opcion no válida en el menú
+                    System.out.println("Digite una opción válida. No nos haga perder más el tiempo."); 
+            }
+        opcion=Menu.mostrarMenu();
+        }
+    }
+}
