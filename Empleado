@@ -1,0 +1,171 @@
+package gal.colme.android_repaso1;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class Empleado {
+    
+    enum Sexo{HOMBRE, MUJER}    
+    private String nombre;
+    private String apellido1;
+    private String apellido2;
+    private int edad;
+    Sexo sexo;
+    private String estudios;
+    LocalDate fechaInicio;  
+    
+    //constructores
+    public Empleado(){
+    }
+    
+    public Empleado(String nombre, String apellido1, String apellido2, int edad, Sexo sexo, String estudios, LocalDate fechaInicio){
+        this.nombre = nombre;
+        this.apellido1 = apellido1;
+        this.apellido2 = apellido2;
+        this.edad = edad;
+        this.sexo = sexo;
+        this.estudios = estudios;
+        this.fechaInicio = fechaInicio;
+    }
+    
+    //métodos
+    public void datosEmpleado(){ //TOASK deberia ser static y no hacer un auxiliar en el main??
+        Scanner teclado = new Scanner(System.in);        
+        System.out.println("Nombre: ");
+        nombre = teclado.nextLine();
+        System.out.println("Primer apellido: ");
+        apellido1=teclado.nextLine();
+        System.out.println("Segundo apellido: ");
+        apellido2=teclado.nextLine();
+        System.out.println("Edad: ");
+        edad=teclado.nextInt();
+        System.out.println("Sexo (MUJER/HOMBRE): ");//TODO IMPLEMENTAR EL TRY CATCH O ALGO QUE HAGA SALTAR ERROR Y ESOO
+        sexo=Sexo.valueOf(nombre);
+        //this.sexo=Sexo.valueOf(teclado.next(nombre).toUpperCase());
+        System.out.println("Titulacion: ");
+        this.estudios=teclado.next();
+        System.out.println("Fecha inicio en la empresa: ");
+        this.fechaInicio=LocalDate.parse(nombre);
+        System.out.println("");
+    }
+    
+    
+    public static void listarEmpleados(ArrayList<Empleado> empleadosTodos){
+        empleadosTodos.forEach(e -> {//lambda
+            System.out.println(e.toString());
+            e.toStringArray();
+        });
+    }
+        
+    
+    public static ArrayList<Empleado> ordenarAlfabeticamente(ArrayList<Empleado> listaEmpleados){
+        
+        Collections.sort(listaEmpleados, (Empleado o1, Empleado o2)->{int res=o1.getApellido1().compareTo(o2.getApellido1());//lambda
+            if(res!=0)return res;
+            
+            res=o1.getApellido2().compareTo(o2.getApellido2());
+            if (res!=0) return res;
+            
+            else res = o1.getNombre().compareTo(o2.getNombre());
+            return res;
+        });
+        
+        return listaEmpleados;
+    }
+    
+    
+    @Override
+    public String toString (){
+        return "Nombre: "+this.nombre+" "+this.apellido1+" "+this.apellido2+"\n"+"Edad "+this.edad+"\n"+"Sexo "+this.sexo+"\n"+"Titulación "+this.estudios+"\n"+"Fecha de inicio en la empresa: "+this.fechaInicio+"\n"+"***************";
+    }
+    
+    public void toStringArray(){
+    }
+    
+    
+    
+    //rellenar empleados
+    public static ArrayList<Empleado> rellenarEmpleados(){
+        //array de empleados
+        ArrayList<Empleado> empleadosRellenados = new ArrayList();
+        //arrays de lenguajes e idiomas
+        ArrayList<String> lenguajes1 = new ArrayList<>(Arrays.asList("Java", "C", "Cobol", "Fortran", "Ada"));
+        ArrayList<String> lenguajes2 = new ArrayList<>(Arrays.asList("Phyton", "JavaScript", "Ada", "PHP", "Ensamblador"));
+        ArrayList<String> idiomas1 = new ArrayList<>(Arrays.asList("Francés", "Chino", "Alemán"));
+//        ArrayList<String> idiomas2 = new ArrayList<>(Arrays.asList("Castelleano", "Inglés", "Portugués", "Bable"));
+        //relleno los objetos
+        Programador programador1 = new Programador("Manuela", "Carmena", "Villar", 80, Sexo.MUJER, "Derecho", LocalDate.parse("2020-03-20"), lenguajes1);
+        Programador programador2 = new Programador("Paco", "Valor", "Machín", 39, Sexo.HOMBRE, "INEF", LocalDate.parse("2020-12-12"), lenguajes2);
+        Comercial comercial1 = new Comercial("Ana", "Márquez", "Padín", 22, Sexo.MUJER, "Empresas", LocalDate.parse("2020-10-12"), idiomas1);
+        Comercial comercial2 = new Comercial("Sergey", "Cabazo", "Bárcenas", 36, Sexo.HOMBRE, "Enfermería", LocalDate.parse("2020-07-09"), new ArrayList<String>(Arrays.asList("Castelleano", "Inglés", "Portugués", "Bable")));//para meter ya eñ array en una linea, con un objeto anónimo, por eso el arrayList no tiene nombre y no lo necesita
+        
+        empleadosRellenados.add(programador1);
+        empleadosRellenados.add(programador2);
+        empleadosRellenados.add(comercial1);
+        empleadosRellenados.add(comercial2);
+        
+        return empleadosRellenados;
+    }
+        
+    
+    
+    //getters y setters
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido1() {
+        return apellido1;
+    }
+
+    public void setApellido1(String apellido1) {
+        this.apellido1 = apellido1;
+    }
+
+    public String getApellido2() {
+        return apellido2;
+    }
+
+    public void setApellido2(String apellido2) {
+        this.apellido2 = apellido2;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getTitulacion() {
+        return estudios;
+    }
+
+    public void setTitulacion(String titulacion) {
+        this.estudios = titulacion;
+    }
+
+    public LocalDate getFechaComienzo() {
+        return fechaInicio;
+    }
+
+    public void setFechaComienzo(String fechaComienzo) {
+        this.fechaInicio = fechaInicio;
+    }
+}
