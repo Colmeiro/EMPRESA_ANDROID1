@@ -1,0 +1,65 @@
+package gal.colme.android_repaso1;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Programador extends Empleado {
+    //atributos
+    private ArrayList<String> lenguajes;
+    
+    //constructores
+    public Programador(){
+    }
+    
+    public Programador(String nombre, String apellido1, String apellido2, int edad, Sexo sexo, String titulacion, LocalDate fechaInicio, ArrayList<String> lenguajes){
+        super(nombre, apellido1, apellido2, edad, sexo, titulacion, fechaInicio);
+        this.lenguajes = lenguajes;
+    }
+    
+    
+    //métodos
+    public ArrayList<String> lenguajesProgramador(){//TODO fix
+        Scanner teclado = new Scanner(System.in);
+        ArrayList<String> lenguajesArray = new ArrayList();//cambie de nombre porque local variable hides a field??
+        String lenguaje;
+        System.out.println("Escriba uno a uno los lenguajes que maneje:");
+        System.out.println("Cuando desee salir pulse 0");
+        do{
+            System.out.println("Digite otro lenguaje o pulse 0(CERO):");
+            System.out.println("-------------------------------------" + "\n");
+            lenguaje = teclado.next();//TODO ver que hace sin el line
+            if (!lenguaje.equals("0")) lenguajesArray.add(lenguaje);
+        }while(!lenguaje.equals("0"));
+    return lenguajesArray;
+    }
+    
+    
+    @Override
+    public void toStringArray(){
+        System.out.println("Lenguajes de programación dominados: ");
+        for (int i=0; i<lenguajes.size();i++){
+            System.out.println((i+1)+"-. "+lenguajes.get(i));
+        }
+        System.out.println("");
+    }
+    
+//    @Override
+//    public String toString(){
+//        return super.toString(); 
+//    }
+    
+//    @Override
+//    public String toString(){
+//        return super.toString() + getLenguajes(); //esta opcion los sacaba entre corchetes
+//    }
+    
+    
+    //getters y setters
+    public ArrayList<String> getLenguajes() {
+        return lenguajes;
+    }
+
+    public void setLenguajes(ArrayList<String> lenguajes) {
+        this.lenguajes = lenguajes;
+    } 
+}
