@@ -1,0 +1,32 @@
+package gal.colme.android_repaso1;
+import java.util.Scanner;
+
+public abstract class Menu {
+    
+    public static int mostrarMenu()   {
+        int opcion;
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("PROGRAMA XESTIÓN");
+        System.out.println("----------------");
+        System.out.println("1-LISTAR EMPLEAD@S");
+        System.out.println("2-INSCRIBIR EMPLEAD@");
+        System.out.println("0-SALIR");
+        System.out.println("----------------");
+        System.out.println("Digite su opción: ");
+        opcion = teclado.nextInt();
+        System.out.println("");
+        return opcion;
+    }
+    
+    
+    public static int ComprobarDepartamento(){
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("DEPARTAMENTOS");
+        System.out.println("1-PROGRAMADOR/A");
+        System.out.println("2-COMERCIAL");
+        System.out.println("---------------");
+        System.out.println("Digite la categoría correspondiente: ");
+        int cat = teclado.nextInt();
+        return cat;
+    }
+}
